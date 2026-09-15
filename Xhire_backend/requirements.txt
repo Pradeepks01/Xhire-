@@ -1,0 +1,16 @@
+fastapi
+uvicorn[standard]
+sqlmodel
+celery[redis]
+redis
+psycopg2-binary
+openai
+scikit-learn
+pypdf
+numpy
+requests
+python-multipart
+passlib
+bcrypt==4.0.1
+python-jose[cryptography]
+PyMuPDF

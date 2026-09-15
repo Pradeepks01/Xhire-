@@ -1,0 +1,158 @@
+# ==============================================================================
+# Xhire Project .gitignore (Python/FastAPI + Next.js/React + Celery/Databases)
+# ==============================================================================
+
+# ------------------------------------------------------------------------------
+# Operating System & IDE Files
+# ------------------------------------------------------------------------------
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# Editors & IDEs
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+*.bak
+*.tmp
+*~
+
+# ------------------------------------------------------------------------------
+# Environment Variables & Secrets
+# ------------------------------------------------------------------------------
+.env
+.env.*
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+secrets.json
+*.pem
+*.key
+*.crt
+*.cert
+
+# Ensure example env files are always tracked
+!.env.example
+
+# ------------------------------------------------------------------------------
+# Python & FastAPI
+# ------------------------------------------------------------------------------
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+eggs/
+parts/
+var/
+sdist/
+develop-eggs/
+.installed.cfg
+
+# Virtual Environments
+venv/
+.venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# Testing & Coverage
+.pytest_cache/
+.tox/
+.nox/
+.coverage
+.coverage.*
+htmlcov/
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.deepeval/
+.ruff_cache/
+.mypy_cache/
+
+# ------------------------------------------------------------------------------
+# Celery, Redis & Message Brokers
+# ------------------------------------------------------------------------------
+celerybeat-schedule
+celerybeat-schedule.*
+celerybeat.pid
+rabbitmq_data/
+rabbitmq/
+redis_data/
+
+# ------------------------------------------------------------------------------
+# Databases & Storage
+# ------------------------------------------------------------------------------
+# SQLite databases and WAL files
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+*.sqlite
+*.sqlite3
+
+# PostgreSQL volume mounts
+postgres_data/
+pgdata/
+
+# ------------------------------------------------------------------------------
+# Audio, PDF Reports & Scratch Files
+# ------------------------------------------------------------------------------
+# Audio uploads & temporary speech-to-text buffers
+*.wav
+*.mp3
+*.webm
+*.ogg
+*.m4a
+
+# Generated interview PDF reports & exports
+reports/*.pdf
+*.pdf
+
+# Temporary testing & scratch scripts
+scratch/
+**/scratch/
+test_results/
+
+# ------------------------------------------------------------------------------
+# Logs
+# ------------------------------------------------------------------------------
+*.log
+logs/
+**/logs/
+**/log/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# ------------------------------------------------------------------------------
+# Frontend (Next.js 14 / React / TypeScript)
+# ------------------------------------------------------------------------------
+node_modules/
+.next/
+out/
+.turbo/
+dist/
+dist-ssr/
+*.tsbuildinfo
+.eslintcache
+

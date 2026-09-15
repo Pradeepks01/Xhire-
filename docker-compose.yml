@@ -1,0 +1,100 @@
+version: '3.8'
+
+services:
+  # 1. PostgreSQL Database
+  db:
+    image: postgres:15-alpine
+    container_name: X-db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    env_file:
+      - ./.env
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U X -d Xhire"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # 2. RabbitMQ Message Broker
+  broker:
+    image: rabbitmq:3.13-management-alpine
+    container_name: X-broker
+    ports:
+      - "5672:5672"   # AMQP
+      - "15672:15672" # Management UI
+    environment:
+      RABBITMQ_DEFAULT_USER: X
+      RABBITMQ_DEFAULT_PASS: X
+    healthcheck:
+      test: ["CMD-SHELL", "rabbitmq-diagnostics -q check_running"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # 3. FastAPI Backend API
+  api:
+    build: ./Xhire_backend
+    container_name: X-api
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./Xhire_backend/app:/code/app
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    environment:
+      APP_ENV: development
+      DATABASE_URL: postgresql://X:X@db:5432/Xhire
+      BROKER_URL: amqp://X:X@broker:5672/
+      CELERY_BACKEND: rpc://
+      FRONTEND_URL: http://localhost:3000
+      LOG_LEVEL: info
+      LLM_BASE_URL: http://host.docker.internal:8080/v1
+      ASR_URL: http://host.docker.internal:2022/v1/audio/transcriptions
+      TTS_URL: http://host.docker.internal:5000
+
+
+  # 4. Celery Asynchronous Worker
+  worker:
+    build: ./Xhire_backend
+    container_name: X-worker
+    command: celery -A app.worker.celery_app worker --loglevel=info -P solo
+    volumes:
+      - ./Xhire_backend/app:/code/app
+    environment:
+      APP_ENV: development
+      DATABASE_URL: postgresql://X:X@db:5432/Xhire
+      BROKER_URL: amqp://X:X@broker:5672/
+      CELERY_BACKEND: rpc://
+      LOG_LEVEL: info
+      LLM_BASE_URL: http://host.docker.internal:8080/v1
+      ASR_URL: http://host.docker.internal:2022/v1/audio/transcriptions
+      TTS_URL: http://host.docker.internal:5000
+    depends_on:
+      db:
+        condition: service_healthy
+      broker:
+        condition: service_healthy
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  # 5. Next.js Frontend
+  frontend:
+    build: ./Xhire_frontend
+    container_name: X-frontend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./Xhire_frontend:/app
+      - /app/node_modules
+      - /app/.next
+    environment:
+      NEXT_PUBLIC_API_BASE_URL: http://api:8000
+      NODE_ENV: development
+    depends_on:
+      - api
+
+volumes:
+  postgres_data:
