@@ -1,0 +1,51 @@
+.speaking-indicator {
+  --color-violet: 0, 20, 255;
+  --color-orange: 255, 120, 0;
+  --color-white: 255, 255, 255;
+  --rotation-duration: 6s;
+  position: relative;
+  border-radius: 15px;
+  overflow: hidden;
+  padding: 3px;
+  width: 100%;
+  max-width: 806px;
+  box-sizing: border-box;
+}
+
+.speaking-indicator::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 250%;
+  height: 250%;
+  background: conic-gradient(
+    from 0deg,
+    rgba(var(--color-orange), 1),
+    rgba(var(--color-violet), 1),
+    rgba(var(--color-white), 1),
+    rgba(var(--color-orange), 1)
+  );
+  animation: rotateShape var(--rotation-duration) infinite linear;
+  display: none; /* Hidden by default */
+}
+
+.speaking-indicator.playing::before {
+  display: block;
+}
+
+@keyframes rotateShape {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+.speaking-indicator-content {
+  position: relative;
+  z-index: 1;
+  border-radius: 12px;
+  overflow: hidden;
+}
