@@ -1,0 +1,262 @@
+/* file: Xhire_frontend/src/pages/RecruiterDashboard.css */
+
+.dashboard-container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: var(--spacing-lg);
+  animation: fadeIn 0.5s ease-out;
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-xl);
+  padding-bottom: var(--spacing-md);
+  border-bottom: 1px solid var(--neutral-200);
+}
+
+.dashboard-header h2 {
+  margin: 0;
+  color: var(--brand-primary);
+  font-size: 2rem;
+}
+
+.create-btn {
+  background-color: var(--brand-primary);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  box-shadow: var(--shadow-md);
+}
+
+.create-btn:hover {
+  background-color: var(--brand-primary-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Stats Section */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-2xl);
+}
+
+.stat-card {
+  background: white;
+  padding: var(--spacing-lg);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--neutral-200);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--brand-secondary);
+}
+
+.stat-value {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--brand-primary);
+  line-height: 1.2;
+  margin-bottom: var(--spacing-xs);
+}
+
+.stat-label {
+  color: var(--neutral-600);
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Requisition List */
+.req-list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-lg);
+}
+
+.req-list-header h3 {
+  font-size: 1.5rem;
+  color: var(--neutral-800);
+  margin: 0;
+}
+
+.req-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: var(--spacing-lg);
+}
+
+.req-card {
+  background-color: white;
+  border: 1px solid var(--neutral-200);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-lg);
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-card);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.req-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background-color: var(--brand-secondary);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.req-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--brand-secondary);
+}
+
+.req-card:hover::before {
+  opacity: 1;
+}
+
+.req-card h3 {
+  margin-top: 0;
+  margin-bottom: var(--spacing-sm);
+  color: var(--brand-primary);
+  font-size: 1.25rem;
+  line-height: 1.4;
+}
+
+.req-details {
+  margin-bottom: var(--spacing-lg);
+  flex-grow: 1;
+}
+
+.req-detail-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-xs);
+  font-size: 0.95rem;
+  color: var(--neutral-600);
+}
+
+.req-detail-label {
+  font-weight: 500;
+  color: var(--neutral-500);
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 0.25em 0.75em;
+  font-size: 0.85em;
+  font-weight: 600;
+  border-radius: 999px;
+  background-color: var(--neutral-100);
+  color: var(--neutral-700);
+}
+
+.status-badge.active {
+  background-color: rgba(68, 214, 44, 0.15);
+  color: #2a8a1b;
+}
+
+.view-candidates-link {
+  margin-top: auto;
+  background-color: white;
+  border: 1px solid var(--brand-secondary);
+  color: var(--brand-secondary);
+  padding: 0.75rem;
+  font-weight: 600;
+  border-radius: var(--border-radius-md);
+  text-decoration: none;
+  text-align: center;
+  transition: all 0.2s ease;
+}
+
+.view-candidates-link:hover {
+  background-color: var(--brand-secondary);
+  color: white;
+}
+
+/* Modal Styles */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 20, 60, 0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1100;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.modal-content {
+  background-color: white;
+  padding: var(--spacing-2xl);
+  border-radius: var(--border-radius-xl);
+  width: 90%;
+  max-width: 650px;
+  box-shadow: var(--shadow-lg);
+  animation: slideUp 0.3s ease-out;
+}
+
+.modal-content h3 {
+  color: var(--brand-primary);
+  margin-bottom: var(--spacing-lg);
+  font-size: 1.5rem;
+  border-bottom: 1px solid var(--neutral-200);
+  padding-bottom: var(--spacing-md);
+}
+
+.jd-input-method-tabs {
+  display: flex;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-md);
+  background: var(--neutral-100);
+  padding: 4px;
+  border-radius: var(--border-radius-md);
+}
+
+.jd-input-method-tabs button {
+  flex: 1;
+  background: transparent;
+  border: none;
+  padding: var(--spacing-sm);
+  border-radius: var(--border-radius-sm);
+  color: var(--neutral-600);
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.jd-input-method-tabs button.active {
+  background: white;
+  color: var(--brand-primary);
+  box-shadow: var(--shadow-sm);
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-xl);
+  padding-top: var(--spacing-lg);
+  border-top: 1px solid var(--neutral-200);
+}
